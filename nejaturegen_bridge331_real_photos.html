@@ -1,0 +1,324 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0e0e0e;--cream:#f5f3ef;--warm:#e8e3da;--gold:#c4a97d;--muted:#888;--white:#ffffff}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink)}
+
+nav{display:flex;justify-content:space-between;align-items:center;padding:0 56px;height:72px;background:var(--white);border-bottom:1px solid rgba(0,0,0,0.07)}
+.logo{font-family:'Playfair Display',serif;font-size:17px;font-weight:400;letter-spacing:0.08em;color:var(--ink)}
+.logo span{color:var(--gold)}
+.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links a{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#666;text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-tel{font-size:11px;letter-spacing:0.08em;color:var(--gold);text-decoration:none}
+
+.hero{position:relative;height:92vh;min-height:580px;background:#111;overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
+.slide.active{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover;object-position:center}
+.slide-overlay{position:absolute;inset:0;background:rgba(8,7,6,0.55)}
+.slide-content{position:absolute;bottom:0;left:0;right:0;padding:0 56px 72px;display:flex;justify-content:space-between;align-items:flex-end;z-index:2}
+.slide-label{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.slide-title{font-family:'Playfair Display',serif;font-size:56px;font-weight:300;color:#fff;line-height:1.08;max-width:540px}
+.slide-title em{font-style:italic;color:var(--gold)}
+.slide-right{text-align:right}
+.slide-num{font-family:'Playfair Display',serif;font-size:72px;font-weight:300;color:rgba(255,255,255,0.1);line-height:1}
+.slide-sub{font-size:12px;color:rgba(255,255,255,0.45);margin-top:6px;letter-spacing:0.06em}
+.dots{position:absolute;left:56px;bottom:28px;z-index:10;display:flex;gap:10px;align-items:center}
+.dot{width:24px;height:2px;background:rgba(255,255,255,0.28);cursor:pointer;transition:all .3s}
+.dot.on{background:var(--gold);width:42px}
+.prog{position:absolute;bottom:0;left:0;height:2px;background:var(--gold);z-index:10;transition:width .08s linear}
+
+.wrap{padding:88px 56px}
+.sh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:52px;padding-bottom:18px;border-bottom:1px solid rgba(0,0,0,0.08)}
+.st{font-family:'Playfair Display',serif;font-size:38px;font-weight:300}
+.stag{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold)}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(0,0,0,0.06)}
+.gi{background:#111;position:relative;overflow:hidden;cursor:pointer}
+.gi:first-child{grid-column:span 2;grid-row:span 2}
+.gi img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease}
+.gi:first-child img{min-height:460px;height:100%}
+.gi:not(:first-child) img{height:220px}
+.gi:hover img{transform:scale(1.05)}
+.gover{position:absolute;inset:0;background:rgba(8,7,6,0);transition:background .4s;display:flex;align-items:flex-end;padding:22px}
+.gi:hover .gover{background:rgba(8,7,6,0.6)}
+.ginfo{opacity:0;transform:translateY(8px);transition:all .3s}
+.gi:hover .ginfo{opacity:1;transform:translateY(0)}
+.gcat{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.gname{font-family:'Playfair Display',serif;font-size:19px;color:#fff;line-height:1.25}
+.gmeta{font-size:11px;color:rgba(255,255,255,0.55);margin-top:3px}
+.gcap{padding:16px 18px;background:var(--white);border-top:1px solid rgba(0,0,0,0.06)}
+.gcap-cat{font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.gcap-name{font-family:'Playfair Display',serif;font-size:15px;color:var(--ink)}
+.cta-wrap{text-align:center;margin-top:52px}
+.cta{display:inline-flex;align-items:center;gap:12px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:4px}
+
+.about{display:grid;grid-template-columns:1fr 1fr;background:var(--ink)}
+.abv{position:relative;min-height:500px;overflow:hidden}
+.abv img{width:100%;height:100%;object-fit:cover;opacity:0.55}
+.abvyr{position:absolute;bottom:32px;right:32px;font-family:'Playfair Display',serif;font-size:96px;font-weight:300;color:rgba(255,255,255,0.07);line-height:1}
+.abt{padding:72px 60px;display:flex;flex-direction:column;justify-content:center}
+.albl{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.ah{font-family:'Playfair Display',serif;font-size:40px;font-weight:300;color:#fff;line-height:1.2;margin-bottom:26px}
+.ah em{font-style:italic;color:var(--gold)}
+.ab{font-size:14px;line-height:1.9;color:rgba(255,255,255,0.52);margin-bottom:36px}
+.asts{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.07);margin-bottom:36px}
+.ast{padding:22px 18px;background:var(--ink)}
+.astn{font-family:'Playfair Display',serif;font-size:42px;font-weight:300;color:var(--gold);line-height:1}
+.astl{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin-top:5px}
+.lnk{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:3px}
+
+.aw{padding:88px 56px;background:var(--white)}
+.awr{display:grid;grid-template-columns:100px 1fr 140px;gap:28px;align-items:center;padding:26px 0;border-bottom:1px solid rgba(0,0,0,0.07)}
+.awy{font-family:'Playfair Display',serif;font-size:30px;font-weight:300;color:var(--gold)}
+.awt{font-size:15px;color:var(--ink);margin-bottom:3px}
+.awb{font-size:12px;color:var(--muted)}
+.awp{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(0,0,0,0.11);color:var(--muted);width:fit-content;margin-left:auto}
+
+.cs{display:grid;grid-template-columns:1fr 1fr}
+.cl{background:var(--ink);padding:80px 60px;display:flex;flex-direction:column;justify-content:space-between}
+.ch{font-family:'Playfair Display',serif;font-size:44px;font-weight:300;color:#fff;line-height:1.15;margin:18px 0 36px}
+.ch em{font-style:italic;color:var(--gold)}
+.ir{display:flex;gap:18px;margin-bottom:18px}
+.ik{font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);width:64px;flex-shrink:0;padding-top:2px}
+.iv{font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7}
+.cr{background:var(--cream);padding:80px 60px;display:flex;flex-direction:column;justify-content:center}
+.fld{margin-bottom:20px}
+.fld label{font-size:10px;letter-spacing:0.13em;text-transform:uppercase;color:#999;display:block;margin-bottom:7px}
+.fld input,.fld textarea{width:100%;background:#fff;border:1px solid rgba(0,0,0,0.1);padding:12px 15px;font-family:'Jost',sans-serif;font-size:14px;color:var(--ink);outline:none;transition:border-color .2s}
+.fld input:focus,.fld textarea:focus{border-color:var(--gold)}
+.fld textarea{min-height:100px;resize:vertical}
+.btn{background:var(--gold);color:#fff;border:none;padding:14px 34px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.13em;text-transform:uppercase;cursor:pointer;transition:opacity .2s}
+.btn:hover{opacity:.85}
+
+footer{display:flex;justify-content:space-between;align-items:center;padding:20px 56px;background:var(--ink)}
+footer p{font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.05em}
+</style>
+
+<nav>
+  <div class="logo">Nejat Ure<span>g</span>en</div>
+  <ul class="nav-links">
+    <li><a href="#">Projeler</a></li>
+    <li><a href="#">Hakkımızda</a></li>
+    <li><a href="#">Ödüller</a></li>
+    <li><a href="#">İletişim</a></li>
+  </ul>
+  <a href="tel:02422422171" class="nav-tel">0242 242 21 71</a>
+</nav>
+
+<div class="hero">
+  <div class="slide active" id="s0">
+    <img src="https://nejaturegen.com.tr/wp-content/uploads/2021/11/Antalya-Nevzat-Ihrac-Yapisi-1.jpg" alt="Antalya Nevzat İhraç Yapısı" onerror="this.style.display='none'">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div>
+        <div class="slide-label">Anıt Eser — Antalya</div>
+        <h1 class="slide-title">Tarihin izinde <em>mimarlık</em></h1>
+      </div>
+      <div class="slide-right">
+        <div class="slide-num">01</div>
+        <div class="slide-sub">Antalya / Nevzat İhraç Yapısı</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" id="s1">
+    <img src="https://nejaturegen.com.tr/wp-content/uploads/2021/11/The-Shahut-Hotel-1.jpg" alt="The Shahut Hotel" onerror="this.style.display='none'">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div>
+        <div class="slide-label">Otelcilik — Antalya</div>
+        <h1 class="slide-title">Konforla <em>buluşan</em> estetik</h1>
+      </div>
+      <div class="slide-right">
+        <div class="slide-num">02</div>
+        <div class="slide-sub">The Shahut Hotel</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" id="s2">
+    <img src="https://nejaturegen.com.tr/wp-content/uploads/2021/11/Pio-Gastro-Bar-Bistro-1.jpg" alt="Pio Gastro Bar Bistro" onerror="this.style.display='none'">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div>
+        <div class="slide-label">Gastronomi — Antalya</div>
+        <h1 class="slide-title">Mekânın <em>ruhu</em> tasarımda</h1>
+      </div>
+      <div class="slide-right">
+        <div class="slide-num">03</div>
+        <div class="slide-sub">Pio Gastro Bar & Bistro</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" id="s3">
+    <img src="https://nejaturegen.com.tr/wp-content/uploads/2021/11/Char-Me-Otel-5.jpg" alt="Char Me Otel" onerror="this.style.display='none'">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div>
+        <div class="slide-label">Sivil Mimarlık — Antalya</div>
+        <h1 class="slide-title">Zarif çizgilerin <em>dili</em></h1>
+      </div>
+      <div class="slide-right">
+        <div class="slide-num">04</div>
+        <div class="slide-sub">Char Me Otel</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dots" id="dots">
+    <div class="dot on" onclick="go(0)"></div>
+    <div class="dot" onclick="go(1)"></div>
+    <div class="dot" onclick="go(2)"></div>
+    <div class="dot" onclick="go(3)"></div>
+  </div>
+  <div class="prog" id="prg"></div>
+</div>
+
+<div class="wrap">
+  <div class="sh"><h2 class="st">Seçili Projeler</h2><span class="stag">Portföy</span></div>
+  <div class="grid">
+    <div class="gi">
+      <img src="https://nejaturegen.com.tr/wp-content/uploads/2021/11/antalya-hukumet-konagi-1.jpg" alt="Antalya Hükümet Konağı" onerror="this.src='https://nejaturegen.com.tr/wp-content/uploads/2021/10/cropped-logo.jpg'">
+      <div class="gover">
+        <div class="ginfo">
+          <div class="gcat">Anıt Eser</div>
+          <div class="gname">Antalya Hükümet Konağı<br>(Gazi Mustafa Kemal İlköğretim Okulu)</div>
+          <div class="gmeta">Kaleiçi, Antalya · 2021</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gi">
+      <img src="https://nejaturegen.com.tr/wp-content/uploads/2021/11/The-Shahut-Hotel-1.jpg" alt="The Shahut Hotel">
+      <div class="gover">
+        <div class="ginfo">
+          <div class="gcat">Otelcilik</div>
+          <div class="gname">The Shahut Hotel</div>
+          <div class="gmeta">Antalya · 2021</div>
+        </div>
+      </div>
+      <div class="gcap"><div class="gcap-cat">Otelcilik</div><div class="gcap-name">The Shahut Hotel</div></div>
+    </div>
+
+    <div class="gi">
+      <img src="https://nejaturegen.com.tr/wp-content/uploads/2021/11/Pio-Gastro-Bar-Bistro-1.jpg" alt="Pio Gastro Bar Bistro">
+      <div class="gover">
+        <div class="ginfo">
+          <div class="gcat">Gastronomi</div>
+          <div class="gname">Pio Gastro Bar & Bistro</div>
+          <div class="gmeta">Antalya · 2021</div>
+        </div>
+      </div>
+      <div class="gcap"><div class="gcap-cat">Gastronomi</div><div class="gcap-name">Pio Gastro Bar & Bistro</div></div>
+    </div>
+
+    <div class="gi">
+      <img src="https://nejaturegen.com.tr/wp-content/uploads/2021/11/Char-Me-Otel-5.jpg" alt="Char Me Otel">
+      <div class="gover">
+        <div class="ginfo">
+          <div class="gcat">Sivil Mimarlık</div>
+          <div class="gname">Char Me Otel</div>
+          <div class="gmeta">Antalya · 2021</div>
+        </div>
+      </div>
+      <div class="gcap"><div class="gcap-cat">Sivil Mimarlık</div><div class="gcap-name">Char Me Otel</div></div>
+    </div>
+
+    <div class="gi">
+      <img src="https://nejaturegen.com.tr/wp-content/uploads/2021/11/Suleyman-Kacaroglu-Evi-2.jpg" alt="Süleyman Kaçaroğlu Evi">
+      <div class="gover">
+        <div class="ginfo">
+          <div class="gcat">Özel Proje</div>
+          <div class="gname">Süleyman Kaçaroğlu Evi</div>
+          <div class="gmeta">Antalya · 2021</div>
+        </div>
+      </div>
+      <div class="gcap"><div class="gcap-cat">Özel Proje</div><div class="gcap-name">Süleyman Kaçaroğlu Evi</div></div>
+    </div>
+  </div>
+  <div class="cta-wrap"><a href="#" class="cta">Tüm projeleri gör &nbsp;→</a></div>
+</div>
+
+<div class="about">
+  <div class="abv">
+    <img src="https://nejaturegen.com.tr/wp-content/uploads/2021/11/kaucuk-otel-1.jpg" alt="Kaçuk Otel">
+    <div class="abvyr">1991</div>
+  </div>
+  <div class="abt">
+    <div class="albl">Hakkımızda</div>
+    <h2 class="ah">Tarihe saygı,<br><em>geleceğe</em> vizyon</h2>
+    <p class="ab">30 yılı aşkın mimarlık deneyimiyle Antalya'nın eşsiz tarihi dokusunda; anıt eser restorasyonundan lüks otel ve gastronomi projelerine uzanan geniş bir portföyle çalışıyoruz. Her projede mekânın ruhunu korurken çağdaş gereksinimleri en üst düzeyde karşılıyoruz.</p>
+    <div class="asts">
+      <div class="ast"><div class="astn">30+</div><div class="astl">Yıl Deneyim</div></div>
+      <div class="ast"><div class="astn">80+</div><div class="astl">Tamamlanan Proje</div></div>
+      <div class="ast"><div class="astn">12+</div><div class="astl">Ödül</div></div>
+      <div class="ast"><div class="astn">1991</div><div class="astl">Kuruluş</div></div>
+    </div>
+    <a href="#" class="lnk">Daha fazla bilgi &nbsp;→</a>
+  </div>
+</div>
+
+<div class="aw">
+  <div class="sh"><h2 class="st">Ödüller</h2><span class="stag">Başarılar</span></div>
+  <div class="awr">
+    <div class="awy">2023</div>
+    <div><div class="awt">En İyi Restorasyon Projesi</div><div class="awb">Türkiye Mimarlar Odası, Antalya Şubesi</div></div>
+    <div class="awp">Restorasyon</div>
+  </div>
+  <div class="awr">
+    <div class="awy">2019</div>
+    <div><div class="awt">Tarihi Çevre Ödülü</div><div class="awb">Kültür ve Turizm Bakanlığı</div></div>
+    <div class="awp">Anıt Eser</div>
+  </div>
+  <div class="awr">
+    <div class="awy">2015</div>
+    <div><div class="awt">Yılın Mimarlık Ofisi</div><div class="awb">Antalya İnşaat Sektörü Ödülleri</div></div>
+    <div class="awp">Ofis</div>
+  </div>
+</div>
+
+<div class="cs">
+  <div class="cl">
+    <div>
+      <div class="albl">İletişim</div>
+      <h2 class="ch">Projenizi<br><em>konuşalım</em></h2>
+    </div>
+    <div>
+      <div class="ir"><div class="ik">Adres</div><div class="iv">Kılınçarslan Mah. 2. Sakarya Sok.<br>Uysal Apt. 2/6, Kaleiçi — Antalya</div></div>
+      <div class="ir"><div class="ik">Telefon</div><div class="iv">0242 242 21 71<br>0532 214 68 63</div></div>
+      <div class="ir"><div class="ik">E-posta</div><div class="iv">iletisim@nejaturegen.com.tr</div></div>
+    </div>
+  </div>
+  <div class="cr">
+    <div class="fld"><label>Adınız Soyadınız</label><input type="text" placeholder="Ad Soyad"></div>
+    <div class="fld"><label>E-posta</label><input type="email" placeholder="ornek@mail.com"></div>
+    <div class="fld"><label>Konu</label><input type="text" placeholder="Proje türü veya konu"></div>
+    <div class="fld"><label>Mesajınız</label><textarea placeholder="Projeniz hakkında bilgi verin..."></textarea></div>
+    <button class="btn">Gönder →</button>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Nejat Uregen Mimarlık — Tüm hakları saklıdır.</p>
+  <p>Kaleiçi, Antalya</p>
+</footer>
+
+<script>
+let c=0,tot=4,el=0,dur=5500;
+function go(n){
+  document.querySelectorAll('.slide').forEach((s,i)=>s.classList.toggle('active',i===n));
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===n));
+  c=n;el=0;
+}
+function tick(){
+  el+=60;
+  document.getElementById('prg').style.width=Math.min(100,(el/dur)*100)+'%';
+  if(el>=dur)go((c+1)%tot);
+  setTimeout(tick,60);
+}
+tick();
+</script>
